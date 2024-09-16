@@ -1,0 +1,41 @@
+const mongoose=require('mongoose');
+const firmdata=new mongoose.Schema({
+  firmname:{
+    type:String,
+    required:true,
+    unique:true
+  },
+  area:{
+    type:String,
+    required:true
+  },
+  catogary:{
+    type:[{
+      type:String,
+      enum:['veg','non-veg']
+    }
+      ]
+  },
+  region:{
+    type:[{
+      type:String,
+      enum:['south-india','north-india','chinese','japanies']
+    }]
+  },
+  offer:{
+    type:String
+  },
+  image:{
+    type:String
+  },
+  vender:[{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Vendor"
+    
+  }],
+  products:[{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Product'
+    }]
+});
+module.exports=mongoose.model('Firm',firmdata);
